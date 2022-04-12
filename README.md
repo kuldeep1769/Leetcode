@@ -1,2 +1,2 @@
 # Leetcode
-Leetcode in Paython
+The repository consist of Leetcode problem solved in Python in an optimsed way.
