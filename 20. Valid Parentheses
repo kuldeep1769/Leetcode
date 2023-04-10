@@ -1,0 +1,20 @@
+
+
+def is_valid_parentheses(s):
+    stack = []
+    parentheses = {"(": ")", "{": "}", "[": "]"} # defining opening and closing parentheses
+    for char in s:
+        if char in parentheses.keys(): # check if char is an opening parentheses
+            stack.append(char)
+        elif char in parentheses.values(): # check if char is a closing parentheses
+            if len(stack) == 0: # check if there is no matching opening parentheses in the stack
+                return False
+            elif parentheses[stack.pop()] != char: # check if the closing parentheses matches the most recent opening parentheses
+                return False
+    return len(stack) == 0 # check if all opening parentheses have been matched with their corresponding closing parentheses
+
+# example usage
+print(is_valid_parentheses("(){}[]")) # True
+print(is_valid_parentheses("([{}])")) # True
+print(is_valid_parentheses("({[}])")) # False
+
