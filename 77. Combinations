@@ -1,0 +1,30 @@
+class Combinations:
+    def combine(self, n, k):
+        solution = []
+ 
+        def backtrack(start, k, end, temp):
+            if k == 0:
+               solution.append(temp[:])
+               print(f"Combination found: {temp[:]}")
+               return
+ 
+            for i in range(start, end + 1):
+                # Append the current number to the temporary list
+                temp.append(i)
+                print(f"Appending: {i}, Temp: {temp}")
+ 
+                # Recursive call
+                backtrack(i + 1, k - 1, end, temp)
+ 
+                # Backtrack by popping the last element
+                popped = temp.pop()
+                print(f"Popping: {popped}, Temp after pop: {temp}")
+
+                
+        backtrack(1, k, n, [])
+        return solution
+
+# Example usage
+combiner = Combinations()
+result = combiner.combine(4, 2)
+print(f"All combinations: {result}")
