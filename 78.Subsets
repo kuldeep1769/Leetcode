@@ -1,0 +1,35 @@
+class Solution(object):
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        powerset = []
+        n = len(nums)
+
+        # backtrack
+
+        def backtrack(start_index,temp):
+
+            # base case
+            if start_index == n:
+                powerset.append(temp[:])
+                return
+
+            
+
+            # recursive case
+            # choice 1 : include the current element
+            temp.append(nums[start_index])
+            backtrack(start_index + 1, temp)
+
+
+            # backtracking step 
+            temp.pop()
+
+            # choice 2 : exclude the current element
+            backtrack(start_index + 1, temp)
+
+        backtrack(0,[]) # start the iteration from index = 0 with empty list
+        return powerset
+        
