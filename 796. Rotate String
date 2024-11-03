@@ -1,0 +1,26 @@
+class Solution(object):
+    def rotateString(self, s, goal):
+        """
+        :type s: str
+        :type goal: str
+        :rtype: bool
+        """
+        if len(s) != len(goal):
+            return False
+        return goal in s+s
+
+#Intuition
+
+# The key insight is that when you concatenate a string with itself (s + s), it contains all possible rotations of the original string.
+
+# For example, if s = "abcde", then s + s = "abcdeabcde" contains all rotations: "abcde", "bcdea", "cdeab", "deabc", "eabcd".
+
+# Approach
+
+# First, check if lengths are equal (if not, rotation is impossible)
+# Create a concatenated string s + s which contains all possible rotations
+# Check if goal is a substring of s + s
+# s = "abcde", goal = "cdeab"
+# s + s = "abcdeabcde"
+# "cdeab" is present in "abcdeabcde", so return True
+        
