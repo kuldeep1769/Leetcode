@@ -1,0 +1,17 @@
+class Solution(object):
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        left = 0
+        right = len(nums) - 1
+
+        while left < right:
+            mid = (left + right)//2
+            if nums[mid] > nums[right]: # mid is greater than right side( usually mid should be less than right)
+                left = mid + 1 # make mid+1 as left index and right will be len of list
+            else:
+                right = mid # could be that mid is the element as we have to search in right side only
+
+        return nums[right]
