@@ -15,3 +15,5 @@ class Solution(object):
                 right = mid # could be that mid is the element as we have to search in right side only
 
         return nums[right]
+
+# Time Complexity : O(logN)
