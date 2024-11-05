@@ -1,0 +1,29 @@
+class Solution(object):
+    def minChanges(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        count = 0
+        i = 0
+        while i < len(s)-1:
+            if s[i] != s[i+1]:
+                count = count + 1
+            i = i + 2
+
+        return count
+
+#     Intuition
+
+# The problem requires us to count the number of changes needed to make adjacent pairs in the string identical. This means for each pair (s[i], s[i + 1]), we check if they are the same. If they are not, it counts as one required change to make them identical.
+
+# The goal is to minimize the number of changes needed to make all these pairs identical, so we simply count how many pairs have different characters and return this count.
+
+# Approach
+
+# Initialize a counter: Set up a variable count to track the number of pairs that need changes.
+# Iterate through the string in steps of 2: Start a loop at index 0 and increment by 2 each time, so we examine pairs (s[i], s[i+1]).
+# Note: We stop at len(s) - 1 because s[i + 1] needs to exist as the second character in the pair.
+# Check if characters in the pair are different:
+# If s[i] != s[i + 1], increase count by 1 because it represents a change needed.
+# Return the result: After finishing the loop, return count, which gives the minimum number of changes required to make all pairs identical.
