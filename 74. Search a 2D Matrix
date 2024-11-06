@@ -1,0 +1,23 @@
+class Solution(object):
+    def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        left = 0
+        col = len(matrix[0])
+        right = (len(matrix) * len(matrix[0])) - 1
+
+        while left <= right:
+            mid = left + (right - left)//2
+            # Map 1D array index -----to---> 2D array index
+            # mid/col{length of col} of 2D Array 
+            # mid % col {length of col} of 2D Array
+            if matrix[mid/col][mid%col] == target:
+                return True
+            elif matrix[mid/col][mid%col] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return False
