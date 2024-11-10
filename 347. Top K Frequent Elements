@@ -1,0 +1,19 @@
+import heapq
+from collections import Counter
+
+def topKFrequent(nums, k):
+    # Step 1: Count the frequency of each element
+    frequency_map = Counter(nums)
+    print(frequency_map)
+    
+    # Step 2: Use a min-heap to keep track of the k most frequent elements
+    min_heap = []
+    for num, freq in frequency_map.items():
+        heapq.heappush(min_heap, (freq, num))
+        # If the heap size exceeds k, remove the least frequent element
+        if len(min_heap) > k:
+            heapq.heappop(min_heap)
+    
+    # Step 3: Extract the elements from the heap
+    result = [num for freq, num in min_heap]
+    return result
