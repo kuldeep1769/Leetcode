@@ -1,0 +1,25 @@
+def isPrefixOfWord(self, sentence, searchWord):
+        """
+        :type sentence: str
+        :type searchWord: str
+        :rtype: int
+        """
+        # Method 1
+        sent_list = sentence.split(" ")
+
+        for index,word in enumerate(sent_list,start=1):
+            if word.startswith(searchWord):
+                return index
+
+        return -1
+
+        # Method 2 
+        # words = sentence.split()  # split the sentence into a list of words
+        # index = 1  # start counting from 1 for 1-indexed output
+        # for word in words:
+        # # Check if the length of searchWord is <= length of word and
+        # # slice the word to get the prefix of length `len(searchWord)` to compare
+        #     if len(searchWord) <= len(word) and word[:len(searchWord)] == searchWord:
+        #         return index
+        #     index += 1 
+        # return -1  # return -1 if no word starts with searchWord
