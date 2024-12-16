@@ -1,0 +1,27 @@
+import heapq
+
+def modify_nums(nums, k, multiplier):
+    # Make a list of tuples so each number is paired with its index
+    heap = [(num, i) for i, num in enumerate(nums)]
+    
+    # Convert the list into a min-heap based on the values only
+    heapq.heapify(heap)
+    
+    # To store changes reflect back on original array
+    result = nums[:]
+    
+    # Doing operations
+    for _ in range(k):
+        # Extract the smallest item
+        smallest_value, idx = heapq.heappop(heap)
+        
+        # Modify the element
+        updated_value = smallest_value * multiplier
+        
+        # Update the value in the result list
+        result[idx] = updated_value
+        
+        # Reinsert the modified element into the heap
+        heapq.heappush(heap, (updated_value, idx))
+    
+    return result
