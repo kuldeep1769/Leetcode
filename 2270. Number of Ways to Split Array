@@ -1,0 +1,20 @@
+def waysToSplitArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        count = 0
+        sum_full = 0
+        left_sum = 0
+        for i in range(len(nums)):
+            sum_full = sum_full + nums[i]
+
+        for i in range(len(nums)-1):
+            left_sum = left_sum + nums[i]
+            right_sum = sum_full - left_sum
+
+            if left_sum >= right_sum:
+                count = count + 1
+            
+
+        return count
