@@ -6,15 +6,18 @@ def waysToSplitArray(self, nums):
         count = 0
         sum_full = 0
         left_sum = 0
+
+        # Take the full sum of array
         for i in range(len(nums)):
             sum_full = sum_full + nums[i]
 
+        # Loop through second last element in the array, so that atleast 1 element is there as per question
         for i in range(len(nums)-1):
-            left_sum = left_sum + nums[i]
-            right_sum = sum_full - left_sum
+            left_sum = left_sum + nums[i]  # get the left sum 
+            right_sum = sum_full - left_sum  # get the right sum
 
-            if left_sum >= right_sum:
-                count = count + 1
+            if left_sum >= right_sum: # if left_sum >= right_sum
+                count = count + 1 # inc the counter 
             
 
         return count
