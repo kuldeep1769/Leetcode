@@ -1,0 +1,38 @@
+def countPalindromicSubsequence(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        # Get the length of the string
+        n = len(s)
+        # Create a set to store unique letters in the string
+        unique_letters = set(s)
+    
+        # Initialize the result counter
+        result = 0
+    
+        # Iterate over each unique letter in the string
+        for letter in unique_letters:
+           # Initialize indices for the first and last occurrence of 'letter'
+            first_idx = -1
+            last_idx = -1
+        
+            # Identify the first and last occurrence of the letter in the string
+            for i in range(n):
+                if s[i] == letter:
+                    if first_idx == -1:
+                      first_idx = i
+                    last_idx = i
+        
+            # Set to collect unique characters present between the first and last occurrence
+            middle_characters = set()
+            # Collect all unique middle characters
+            for middle in range(first_idx + 1, last_idx):
+                middle_characters.add(s[middle])
+        
+            # Add the count of unique middle characters to the result
+            result += len(middle_characters)
+    
+            # Return the total count of palindromic subsequences
+        return result
+        
