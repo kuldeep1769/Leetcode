@@ -1,0 +1,36 @@
+def shiftingLetters(self, s, shifts):
+        """
+        :type s: str
+        :type shifts: List[List[int]]
+        :rtype: str
+        """
+        # Determine the length of the string s
+        n = len(s)
+    
+        # Initialize the change array with one additional slot for managing boundary
+        change = [0] * (n + 1)
+    
+        # Iterate over each shift instruction in the shifts list
+        for start, end, direction in shifts:
+            # Apply a positive or negative increment at the start index
+            if direction == 1:  # If the direction is forward (1)
+                change[start] += 1
+                if end + 1 < n:  # Ensure not to go out of bounds
+                   change[end + 1] -= 1  # Cancel the effect after the end index
+            else:               # If the direction is backward (0)
+                change[start] -= 1
+                if end + 1 < n:  # Ensure not to go out of bounds
+                   change[end + 1] += 1  # Cancel the effect after the end index
+    
+        # Accumulate shift values from the `change` array into effective shift for each position
+        shift_amount = 0
+        result = []
+        for i in range(n):
+            shift_amount += change[i]
+            # Convert current character to its order in alphabet, apply the net shifts,
+            # then convert back to character, ensuring wrap-around with modulo 26
+            new_char = (ord(s[i]) - ord('a') + shift_amount) % 26 + ord('a')
+            result.append(chr(new_char))
+    
+        # Convert list of characters back to a string and return
+        return "".join(result)
