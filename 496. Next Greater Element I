@@ -1,0 +1,39 @@
+def nextGreaterElement(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        # O(n+m) Solution
+
+        # Initialize an empty stack for processing elements in one pass
+        stack = []
+        # This dictionary will store the next greater element for each element in nums2
+        hashMap = {}
+        # This list will store the final results, mapping elements from nums1 to their next greater elements in nums2
+        answer = []
+
+        # Traverse through all elements in nums2
+        # { element : next_greater_element}
+        for num in nums2:
+            # Use the stack to find and record the next greater elements
+            while stack and num > stack[-1]:
+            # If current num is greater than the element at the top of the stack,
+            # it is the next greater element for that stack top
+               hashMap[stack.pop()] = num
+                # Push the current number onto the stack for future comparison
+            stack.append(num)
+
+        # After processing all elements of nums2, if there are any elements left in the stack,
+        # it means these elements have no greater elements to their right, hence not added to hashMap.
+
+        # Process each element in nums1 to determine their next greater element found in nums2
+        for element in nums1:
+            # If the element has a recorded "next greater" in hashMap from the previous loop
+            if element in hashMap:
+               answer.append(hashMap[element])  # Add the next greater element to the answer list
+            else:
+               answer.append(-1)  # If no next greater element was recorded, append -1
+
+        # Return the fully populated answer list which corresponds to each element in nums1
+        return answer
