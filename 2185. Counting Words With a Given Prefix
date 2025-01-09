@@ -1,0 +1,11 @@
+def prefixCount(self, words: List[str], pref: str) -> int:
+        count = 0
+        n = len(pref)
+
+        for word in words:
+            # here use slicing to get the chars upto that 'n' length
+            if len(word) >= n and word[:n] == pref:
+                count = count + 1
+
+        return count
+            
