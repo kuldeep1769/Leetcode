@@ -1,0 +1,17 @@
+def findThePrefixCommonArray(self, A, B):
+        """
+        :type A: List[int]
+        :type B: List[int]
+        :rtype: List[int]
+        """
+        a = set()
+        b = set()
+        temp = []
+
+        for i in range(len(A)):
+            a.add(A[i])
+            b.add(B[i])
+# at every "push" operation , get the intersection count and store in temp list
+            temp.append(len(list(a & b)))
+
+        return temp
