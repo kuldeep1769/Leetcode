@@ -1,0 +1,30 @@
+def xorAllNums(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: int
+        """
+        # create a dic to store key (number) : value(frequency)
+        
+
+        xor_dic = {}
+        result = 0
+    
+        for num in nums1:
+            # Increment by length of nums2 if found, else initialize the value using the length of nums2
+            if num in xor_dic:
+                xor_dic[num] += len(nums2)
+            else:
+                xor_dic[num] = len(nums2)
+        
+        for num in nums2:
+            # Increment by length of nums1 if found, else initialize the value using the length of nums1
+            if num in xor_dic:
+                xor_dic[num] += len(nums1)
+            else:
+                xor_dic[num] = len(nums1)
+    
+        # XOR operation on keys with odd values
+        for key, value in xor_dic.items():
+            if value % 2 != 0:
+               result ^= key
