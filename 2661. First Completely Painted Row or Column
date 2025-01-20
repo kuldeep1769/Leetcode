@@ -1,0 +1,35 @@
+def firstCompleteIndex(self, arr, mat):
+        """
+        :type arr: List[int]
+        :type mat: List[List[int]]
+        :rtype: int
+        """
+        m = len(mat)
+        n = len(mat[0])
+        lookup = {}
+        
+        # Build the lookup map of value -> (row, col)
+        for r in range(m):
+            for c in range(n):
+                lookup[mat[r][c]] = (r, c)
+        
+        # Initialize painted count arrays
+        painted_rows = [0] * m
+        painted_cols = [0] * n
+        
+        # Process each index in arr
+        for i in range(len(arr)):
+            value = arr[i]
+            row, col = lookup[value]
+            
+            # Paint and increment counts
+            painted_rows[row] += 1
+            painted_cols[col] += 1
+            
+            # Check if any row or column is fully painted
+            if painted_rows[row] == n or painted_cols[col] == m:
+               return i
+    
+        # Should not reach here according to the problem statement as one will be completely painted eventually
+        return -1
+        
