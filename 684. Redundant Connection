@@ -1,0 +1,20 @@
+def findRedundantConnection(edges):
+    parent = list(range(len(edges) + 1))
+    
+    def find(x):
+        if parent[x] != x:
+            parent[x] = find(parent[x])
+        return parent[x]
+    
+    def union(x, y):
+        rootX = find(x)
+        rootY = find(y)
+        if rootX != rootY:
+            parent[rootY] = rootX
+            return True  # successfully united
+        return False  # failure in uniting means a cycle
+
+    # Iterate from the last edge to the first
+    for a, b in reversed(edges):
+        if not union(a, b):
+            return [a, b]
