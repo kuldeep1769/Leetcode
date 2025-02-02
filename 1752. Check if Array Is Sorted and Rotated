@@ -1,0 +1,20 @@
+def check(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        # track the peak count in the array
+        peak_count = 0
+
+        n=len(nums)
+        for i in range(n):
+            # peak = if current element is greater than the next element
+            # use "%" to go on first index from the last index
+            if nums[i]>nums[(i+1)%n]:
+
+                
+                # inc. the peak count if you find a peak in the array
+                peak_count = peak_count + 1
+
+        # return true if count is equal to 1 , means only 1 peak is there
+        return peak_count <= 1
