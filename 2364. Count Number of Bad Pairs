@@ -1,0 +1,40 @@
+'''
+We are given an array and need to count bad pairs. A pair (i,j)is bad if:
+
+j−i !=nums[j]−nums[i]
+
+This can be rewritten as:
+
+nums[j]−j!=nums[i]−i
+
+So, we just need to track how many times each nums[i] - i value appears and use it to count good pairs.
+
+📝 Game Plan
+
+1️⃣ Total Pairs Formula
+
+The total number of pairs in an array of size ( n ) is:
+(n(n-1))/2
+2️⃣ Counting Good Pairs Efficiently
+
+Use a hash map to track the frequency of ( nums[i] - i ).
+Each time we see the same value again, it forms a good pair.
+3️⃣ Subtract Good Pairs from Total Pairs
+
+This gives us the bad pairs count.
+'''
+
+def countBadPairs(self, nums: List[int]) -> int:
+        freq = {}
+        good_pairs = 0
+
+        for i, num in enumerate(nums):
+            key = num - i
+            if key in freq:
+                good_pairs += freq[key]
+            if key not in freq:
+                freq[key] = 0
+            freq[key] += 1
+
+        n = len(nums)
+        return (n * (n - 1)) // 2 - good_pairs
