@@ -1,0 +1,18 @@
+def dailyTemperatures(self, temperatures):
+        """
+        :type temperatures: List[int]
+        :rtype: List[int]
+        """
+        result = [0] * len(temperatures)
+        stack = [] #empty stack
+        
+        # Traverse the array of temperature as index and value pair as we need index
+        for index,temp in enumerate(temperatures):
+            # we use while loop with stack in Monotonic Stack
+            # check if previous temp(from stack) is less than the actual temperature
+            while stack and temperatures[stack[-1]] < temp:
+                previous_temperature = stack.pop()
+                result[previous_temperature] = index - previous_temperature
+            stack.append(index)
+            
+        return result
