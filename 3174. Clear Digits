@@ -1,0 +1,15 @@
+def clearDigits(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        output = ""
+        stack = []
+
+        for i in range(len(s)):
+            if not s[i].isdigit():
+                stack.append(s[i])
+            elif s[i].isdigit() and not stack[-1].isdigit():
+                stack.pop()
+
+        return "".join(stack)
