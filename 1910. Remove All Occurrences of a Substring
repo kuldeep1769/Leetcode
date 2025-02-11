@@ -1,0 +1,27 @@
+def removeOccurrences(self, s, part):
+        """
+        :type s: str
+        :type part: str
+        :rtype: str
+        """
+        stack = []
+        part_len = len(part)
+        
+        for char in s:
+            stack.append(char)
+            
+            # Check if the tail of the stack matches `part`
+            if len(stack) >= part_len:
+                # We'll compare in reverse to avoid unnecessary joins
+                match = True
+                for i in range(1, part_len + 1):
+                    if stack[-i] != part[-i]:
+                        match = False
+                        break
+                
+                # If all characters match, pop the `part_len` elements from stack
+                if match:
+                    for _ in range(part_len):
+                        stack.pop()
+    
+        return ''.join(stack)
