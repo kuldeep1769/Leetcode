@@ -1,0 +1,33 @@
+def maximumSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # Dictionary to store sum of digits as keys and a list of the corresponding numbers as values
+        digit_sum_to_nums = {}
+     
+        # Function to calculate sum of digits of a number
+        def sum_of_digits(n):
+            return sum(int(digit) for digit in str(n))
+     
+        # Fill the dictionary with data
+        for num in nums:
+            sum_digits = sum_of_digits(num)
+            if sum_digits not in digit_sum_to_nums:
+                digit_sum_to_nums[sum_digits] = []
+            digit_sum_to_nums[sum_digits].append(num)
+     
+        max_sum = -1  # Initialize max_sum as -1 to handle cases where no valid pairs exist
+     
+        # Iterate over the collections of numbers with the same sum of digits
+        for numbers in digit_sum_to_nums.values():
+            if len(numbers) > 1:  # We need at least two numbers to form a valid pair (i, j)
+                # Sort the numbers; the two largest will give the maximum sum
+                numbers.sort()
+                # Update max_sum with the sum of the two largest numbers in this group
+                current_sum = numbers[-1] + numbers[-2]
+                if current_sum > max_sum:
+                    max_sum = current_sum
+     
+        return max_sum
+        
