@@ -1,0 +1,36 @@
+import heapq
+def minOperations(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        # Initialize the min-heap with the elements of nums
+        heapq.heapify(nums)
+        
+        operations = 0
+        
+        while len(nums) > 1 and nums[0] < k:
+            # Get the smallest two elements from the heap
+            x = heapq.heappop(nums)
+            y = heapq.heappop(nums)
+            
+            # If the smallest element already meets or exceeds k, return operations
+            if x >= k:
+                return operations
+            
+            # Combine the two smallest elements using the specified formula
+            new_elem = x * 2 + y
+            
+            # Add the new element back to the heap
+            heapq.heappush(nums, new_elem)
+            
+            operations += 1
+        
+        # Lastly, check the condition for the remaining elements in the heap
+        if nums[0] >= k:
+            return operations
+        else:
+            # If it's not possible to reach the target with remaining elements
+            return -1
+            
