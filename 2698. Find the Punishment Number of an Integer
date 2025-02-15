@@ -1,0 +1,30 @@
+ def punishmentNumber(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        def can_partition(num_str, target):
+            length = len(num_str)
+            # Use a set to store the sums we can achieve
+            def backtrack(start, current_sum):
+                if current_sum > target:
+                    return False
+                if start == length:
+                    return current_sum == target
+                for end in range(start + 1, length + 1):
+                    # Get the substring and convert to integer
+                    part = int(num_str[start:end])
+                    if backtrack(end, current_sum + part):
+                        return True
+                return False
+            
+            return backtrack(0, 0)
+
+        total_sum = 0
+        for i in range(1, n + 1):
+            square = i * i
+            if can_partition(str(square), i):
+                total_sum += square
+        
+        return total_sum
+        
