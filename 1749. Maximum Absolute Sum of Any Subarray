@@ -1,0 +1,22 @@
+def maxAbsoluteSum(self, nums: List[int]) -> int:
+        # Initializing variables to store maximum and minimum subarray sums found so far and at the current index
+        max_ending_here = min_ending_here = 0
+        max_so_far = min_so_far = 0
+        
+        # Iterate through the array to compute subarray sums
+        for num in nums:
+            # Calculate possible max subarray ending here by including the current number
+            # Either start new subarray at current number or extend existing max subarray
+            temp_max = max(num, max_ending_here + num)
+            # Calculate possible min subarray ending here by including the current number
+            # Either start new subarray at current number or extend existing min subarray
+            min_ending_here = min(num, min_ending_here + num)        
+            max_ending_here = temp_max  # update max_ending_here to the newly computed value
+            
+            # Update the overall global max and min sums found so far
+            max_so_far = max(max_so_far, max_ending_here)
+            min_so_far = min(min_so_far, min_ending_here)
+        
+        # Maximum of the absolute values of max_so_far and min_so_far gives the result
+        return max(abs(max_so_far), abs(min_so_far))
+        
