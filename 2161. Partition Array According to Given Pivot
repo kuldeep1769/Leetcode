@@ -1,3 +1,5 @@
+
+################ Method 1 ####################
 def pivotArray(self, nums, pivot):
         """
         :type nums: List[int]
@@ -17,3 +19,29 @@ def pivotArray(self, nums, pivot):
                 less.append(nums[i])
                 
         return less + piv + great
+
+################ Method 2 : Using Two Pointer ####################
+Time Complexity : O(n)
+Space Complexity : O(1)
+def pivotArray(nums, pivot):
+    """
+    Uses a variation of the three-way partitioning method found in the QuickSort algorithm
+    to rearrange elements around a pivot value.
+    """
+    n = len(nums)
+    left = 0
+    right = n - 1
+    middle = 0
+
+    while middle <= right:
+        if nums[middle] < pivot:
+            nums[left], nums[middle] = nums[middle], nums[left]
+            left += 1
+            middle += 1
+        elif nums[middle] > pivot:
+            nums[right], nums[middle] = nums[middle], nums[right]
+            right -= 1
+        else:
+            middle += 1
+
+    return nums
