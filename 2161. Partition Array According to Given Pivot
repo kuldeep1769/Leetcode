@@ -1,0 +1,19 @@
+def pivotArray(self, nums, pivot):
+        """
+        :type nums: List[int]
+        :type pivot: int
+        :rtype: List[int]
+        """
+        less = []
+        piv = []
+        great = []
+
+        for i in range(len(nums)):
+            if nums[i] > pivot:
+                great.append(nums[i])
+            elif nums[i] == pivot:
+                piv.append(nums[i])
+            else:
+                less.append(nums[i])
+                
+        return less + piv + great
