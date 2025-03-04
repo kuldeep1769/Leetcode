@@ -1,0 +1,17 @@
+def checkPowersOfThree(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        
+        Steps to solve the problem:
+
+        Convert the given number n into its ternary (base-3) representation using repeated division by 3, and check the remainders.
+        If any digit in this representation exceeds 1, return false since this would imply a repeated use of that power of three.
+        If no such digit is found and all are 0 or 1, return true.
+        """
+        while n > 0:
+            if n % 3 == 2:
+                return False
+            n //= 3
+        
+        return True
