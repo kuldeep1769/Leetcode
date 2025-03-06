@@ -1,0 +1,33 @@
+def findMissingAndRepeatedValues(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: List[int]
+        """
+        lookup = {}
+        output = []
+        sum_ = 0
+        n = len(grid) * len(grid[0])
+
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] in lookup:
+                    lookup[grid[i][j]] = lookup[grid[i][j]] + 1
+                else:
+                    lookup[grid[i][j]] = 1
+
+        
+        for key,value in lookup.items():
+            if value >1:
+                output.append(key)
+
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                sum_ = sum_ + grid[i][j]
+                
+        sum_total = n*(n+1)//2
+                
+        miss = sum_total - sum_ + output[0]
+        # 10 - 8 + 2
+        output.append(miss)
+                
+        return output
