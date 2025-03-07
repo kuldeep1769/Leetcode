@@ -1,0 +1,16 @@
+def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        # Find the maximum number of candies that any kid currently has
+        max_candies = max(candies)
+        # Create a result list where each element is a boolean
+        # This boolean will be True if the kid could have the greatest number of candies
+        # after receiving all the extraCandies; otherwise, False
+        result = []
+        for c in candies:
+            # Check if the current kid's candies plus the extraCandies is at least
+            # as much as the maximum candies any kid has
+            if c + extraCandies >= max_candies:
+                result.append(True)
+            else:
+                result.append(False)
+        
+        return result
