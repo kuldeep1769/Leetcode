@@ -1,0 +1,33 @@
+#  time complexity of the algorithm is ( O(n) )
+
+def minimumRecolors(self, blocks: str, k: int) -> int:
+        # calculate the length of the 'blocks' string
+        n = len(blocks)
+        
+        # if 'k' is more than the length of the string, it's impossible to have k consecutive 'B's
+        if k > n:
+            return -1  # This scenario is not explicitly described in the problem so return -1 or handle    appropriately
+        
+        white_count = 0  # to keep track of 'W's in current window of size 'k'
+        min_changes_needed = float('inf')  # initialize the minimum changes needed to a high value
+        
+        left = 0  # left boundary of the sliding window
+        
+        for right in range(n):
+            # If current block is 'W', it needs to change to 'B' for a fully black window segment
+            if blocks[right] == 'W':
+                white_count += 1
+            
+            # If the window size exceeds 'k', move the left boundary to the right
+            if right - left + 1 > k:
+                # If the outgoing block from the left was 'W', decrease the 'white_count'
+                if blocks[left] == 'W':
+                    white_count -= 1
+                left += 1
+            
+            # Check the count of 'W's if the window is exactly of size 'k'
+            if right - left + 1 == k:
+                # Track the minimum number of whites encountered in any valid window
+                min_changes_needed = min(min_changes_needed, white_count)
+        
+        return min_changes_needed
