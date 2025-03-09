@@ -1,0 +1,38 @@
+'''
+Intuition
+
+The problem requires finding alternating groups of length k. A key observation is that we can extend the array to simulate a cyclic sequence, ensuring we check all possible groups without worrying about wrapping around.
+
+Approach
+
+Extend the array
+We append the first (k-1) elements to the end of the array. This simulates a cyclic sequence, allowing us to check alternating groups that might wrap around.
+Sliding Window Technique:
+Maintain two pointers: left and right, where right iterates over the array.
+If two consecutive elements are the same, reset left = right, breaking the alternating sequence.
+Whenever the window size reaches at least k, count it as a valid alternating group.
+Complexity
+
+Time complexity: O(n + k)
+
+Space complexity: O(k)
+
+'''
+def numberOfAlternatingGroups(self, colors, k):
+        """
+        :type colors: List[int]
+        :type k: int
+        :rtype: int
+        """
+        n = len(colors)
+        count = 0
+        left = 0
+
+        for right in range(n + k - 1):
+            if right > 0 and colors[right % n] == colors[(right - 1) % n]:
+                left = right  
+            
+            if right - left + 1 >= k:
+                count += 1  
+        
+        return count
