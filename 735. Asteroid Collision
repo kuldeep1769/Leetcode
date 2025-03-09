@@ -1,0 +1,27 @@
+def asteroidCollision(self, asteroids):
+        """
+        :type asteroids: List[int]
+        :rtype: List[int]
+        """
+        stack = []
+
+        for asteroid in asteroids:
+            # Check for possible collisions
+            while stack and stack[-1] > 0 and asteroid < 0:
+                if stack[-1] < -asteroid:
+                    # The right-moving asteroid is smaller and explodes
+                    stack.pop()
+                    continue   # Continue to check with the next on the stack
+                elif stack[-1] == -asteroid:
+                    # Both asteroids are of the same size and will explode.
+                    stack.pop()
+                    break
+                else:
+                    # The right-moving asteroid is larger, so left-moving explodes
+                    break
+            else:
+                # No collision, just append the asteroid to the stack
+                stack.append(asteroid)
+
+        return stack
+        
