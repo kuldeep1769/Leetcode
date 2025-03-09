@@ -1,0 +1,15 @@
+def removeStars(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        stack = []
+        s = list(s)
+
+        for i in range(len(s)):
+            if s[i] != '*':
+                stack.append(s[i])
+            elif s[i] == '*' and stack[-1]!='*':
+                stack.pop()
+
+        return ''.join(stack)
