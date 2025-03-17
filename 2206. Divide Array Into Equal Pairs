@@ -1,0 +1,15 @@
+def divideArray(self, nums: List[int]) -> bool:
+        dic = {}
+        count = 0
+
+        for i in range(len(nums)):
+            if nums[i] in dic:
+                dic[nums[i]] = dic[nums[i]] + 1
+            else:
+                dic[nums[i]] = 1
+
+        for key,value in dic.items():
+            if (value %2== 1):
+                return False
+        return True
+        
