@@ -1,0 +1,35 @@
+def countDays(self, days: int, meetings: List[List[int]]) -> int:
+
+        '''
+        #####Intuition#####
+
+        The key insight is that we need to count days that have no meetings scheduled. 
+        Instead of tracking available days directly, it's easier to track days that have meetings and then subtract from the total.
+        
+        #######Approach######
+        
+        Sort the meetings by start day to process them in chronological order
+        Merge overlapping meetings to avoid counting the same day multiple times
+        For each merged interval, count the days it covers
+        Subtract the total meeting days from the total available days
+        Complexity
+        
+        Time complexity: O(n log n)
+        
+        Space complexity: O(n)
+        
+        '''
+        meetings.sort()
+        merged_meetings = []
+        for meeting in meetings:
+            if not merged_meetings or meeting[0] > merged_meetings[-1][1]:
+                merged_meetings.append(meeting)
+            else:
+                merged_meetings[-1][1] = max(merged_meetings[-1][1], meeting[1])
+        
+        meeting_days_count = 0
+        for start, end in merged_meetings:
+            meeting_days_count += end - start + 1
+        
+        return days - meeting_days_count
+        
