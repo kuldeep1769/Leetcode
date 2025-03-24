@@ -1,3 +1,30 @@
+
+################# Method 1 #####################
+def countDays(self, days: int, meetings: List[List[int]]) -> int:
+        n = len(meetings)
+        meetings.sort()  # Sort meetings by their start times in increasing order.
+        
+        result = 0  # Initialize result to store count of free days.
+        start = 0  # Initialize a start variable, though unused in the solution, it's part of the original code structure.
+        end = 0  # Initialize end to track the last day there was a meeting.
+
+        # Iterate over sorted meetings
+        for meet in meetings:
+            if meet[0] > end:
+                # If there's a gap between current meeting's start and last meeting's end:
+                result = result + meet[0] - end - 1  # Add free days to result. Subtract 1 to account for endpoint inclusivity.
+            
+            # Update `end` to be the maximum observed end day so far
+            end = max(end, meet[1])
+
+        # After processing all meetings, if there are days left after the last meeting
+        if days > end:
+            result = result + days - end  # Add all these days to the result.
+
+        return result  # Return the total number of free days.
+
+
+################# Method 2 #####################
 def countDays(self, days: int, meetings: List[List[int]]) -> int:
 
         '''
