@@ -1,0 +1,31 @@
+def canPartition(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        # Calculate the total sum of all elements in the array
+        total_sum = sum(nums)
+        
+        # If the total sum is odd, it's impossible to split it into two equal sum subsets
+        if total_sum % 2 != 0:
+            return False
+        
+        # Otherwise, the target is half of the total sum
+        target = total_sum // 2
+        
+        # Create a DP array to store whether a specific sum can be achieved with some elements
+        dp = [False] * (target + 1)
+        
+        # We can achieve sum of 0 with empty set
+        dp[0] = True
+        
+        # Iterate over each element in the array
+        for num in nums:
+            # Iterate over possible sums from target down to num
+            for i in range(target, num - 1, -1):
+                # Update the DP array
+                # The current number can be included only if the remaining sum (i - num) was achievable
+                dp[i] = dp[i] or dp[i - num]
+        
+        # If dp[target] is True, it means we can partition the array into two subsets of equal sum
+        return dp[target]
