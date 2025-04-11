@@ -1,0 +1,37 @@
+def countSymmetricIntegers(self, low, high):
+        """
+        :type low: int
+        :type high: int
+        :rtype: int
+        """
+        count = 0
+        for num in range(low, high + 1):
+            s = str(num)
+            length = len(s)
+            if length % 2 == 0:  # Only check symmetry for even-length numbers
+                mid = length // 2
+                first_half = s[:mid]
+                second_half = s[mid:]
+                sum_first_half = sum(int(digit) for digit in first_half)
+                sum_second_half = sum(int(digit) for digit in second_half)
+                if sum_first_half == sum_second_half:
+                    count += 1
+        return count
+
+
+'''
+Convert x to a string.
+If the number of digits in x is odd, return False.
+Split the string into two halves.
+Calculate sums for the first and second halves.
+Compare the sums and return True if they are equal, otherwise return False.
+Use a loop to iterate from low to high, applying the is_symmetric function to each number.
+
+Count the number of times the is_symmetric function returns True, and this will give the total count of symmetric numbers in the range.
+
+ Time Complexity : O(N * D), 
+ where:
+
+N represents the number of integers in the range (high - low + 1), and
+D represents the number of digits in the maximum value (high), approximated as log10(high) + 1.
+'''
