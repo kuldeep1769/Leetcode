@@ -1,0 +1,28 @@
+def countGoodNumbers(self, n: int) -> int:
+        MOD = 10**9 + 7
+        even_digits = [0, 2, 4, 6, 8]  # Digits placed on even indices (0, 2, ...)
+        prime_digits = [2, 3, 5, 7]    # Digits placed on odd indices (1, 3, ...)
+        
+        num_events = len(even_digits)  # 5 possibilities for even indexed places
+        num_odds = len(prime_digits)   # 4 possibilities for odd indexed places
+    
+        # If n is 1, we only consider the first position which is even-indexed
+        if n == 1:
+            return num_events
+        
+        # To find the total number for length n:
+        # Total = (choices at index 0) * (choices at index 1) * ... * (choices at index n-1)
+        # The product repeats every two digits as even, odd, even, odd, ...
+        
+        # Number of full pairs (even, odd)
+        pairs = n // 2
+        
+        # Result starts counting pairs of even,odd choices
+        result = pow(num_events, pairs, MOD) * pow(num_odds, pairs, MOD) % MOD
+        
+        # If n is odd, we need to handle the last extra even indexed position
+        if n % 2 == 1:
+            result = result * num_events % MOD
+        
+        return result
+        
