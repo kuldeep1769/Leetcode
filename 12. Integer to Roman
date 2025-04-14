@@ -1,0 +1,25 @@
+def intToRoman(self, num: int) -> str:
+        Roman = ""
+        storeIntRoman = [[1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]]
+        for i in range(len(storeIntRoman)):
+            while num >= storeIntRoman[i][0]:
+                Roman += storeIntRoman[i][1]
+                num -= storeIntRoman[i][0]
+        return Roman
+
+        '''
+        Approach for this Problem:
+
+Initialize an empty string called Roman to store the resulting Roman numeral.
+Create a vector of pairs called storeIntRoman, to store the Roman numeral values and their corresponding symbols.
+Iterate through the storeIntRoman vector using a for loop.
+For each pair, check if the input integer is greater than or equal to the Roman numeral value.
+If it is, add the corresponding symbol to the Roman string and subtract the corresponding value from the input integer.
+Repeat steps 4-5 until the input integer becomes zero.
+Return the Roman string.
+
+        Time Complexity and Space Complexity:
+
+        Time complexity: O(13) = O(1) - Approach 1
+        Space complexity: O(13) = O(1) - Approach 1
+'''
