@@ -1,0 +1,39 @@
+def countGoodTriplets(self, arr, a, b, c):
+        """
+        :type arr: List[int]
+        :type a: int
+        :type b: int
+        :type c: int
+        :rtype: int
+        """
+        count = 0
+        for i in range(len(arr)):
+            for j in range(i+1,len(arr)):
+                for k in range(j+1,len(arr)):
+                    if abs(arr[i] - arr[j]) <=a and abs(arr[j] - arr[k]) <=b and abs(arr[i] - arr[k]) <=c:
+                        count = count + 1
+
+
+        return count
+
+
+        '''
+        Approach & Step-by-Step Visualization🔍
+
+1 . Triple Nested Loops:
+
+Outer Loop (i): Iterate over each element in the array from the first to the third last element.
+Middle Loop (j): For each i, iterate over elements from i+1 to the second last element.
+Inner Loop (k): For each j, iterate over elements from j+1 to the last element.
+2 . Check Conditions:
+
+For each triplet (i, j, k), verify the following conditions:
+▪ |arr[i] - arr[j]| <= a
+▪ |arr[j] - arr[k]| <= b
+▪ |arr[i] - arr[k]| <= c
+
+If all three conditions are satisfied, increment the count of good triplets.
+3 . Return Result:
+
+After checking all possible triplets, return the total count of good triplets.
+'''
